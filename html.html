@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamna Akbar Butt - WebGIS CV</title>
+    
+    <!-- Leaflet CSS for Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.draw@1.0.4/dist/leaflet.draw.css" />
+    
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.draw@1.0.4/dist/leaflet.draw.js"></script>
+    <script src="https://unpkg.com/turf@6.5.0/turf.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        header {
+            background-color: #004d40;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        header p {
+            margin: 5px 0;
+        }
+        header a {
+            color: #ffcc00;
+            text-decoration: none;
+        }
+        section {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+        section h2 {
+            text-align: center;
+            color: #004d40;
+            margin-bottom: 20px;
+        }
+        .cv-section, .maps-section, .webgis-section {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+        .maps-section img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 10px auto;
+            border: 1px solid #ccc;
+        }
+        #map {
+            height: 500px;
+            border-radius: 8px;
+        }
+        footer {
+            background-color: #004d40;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        footer a {
+            color: #ffcc00;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Hamna Akbar Butt</h1>
+    <p>Lahore, Pakistan | <a href="mailto:hamnaakbarbutt@gmail.com">hamnaakbarbutt@gmail.com</a> | <a href="https://linkedin.com/in/hamnaakbarb" target="_blank">LinkedIn</a></p>
+</header>
+
+<section>
+    <!-- CV Section -->
+    <div class="cv-section">
+        <h2>About Me</h2>
+        <p>To advance cutting-edge research in GIS and remote sensing, focusing on sustainable solutions in spatial analysis and environmental management. I aim to contribute to innovative projects under the mentorship of esteemed professors, leveraging my academic training, research experience, and technical expertise to address global challenges.</p>
+
+        <h3>Academic Qualifications</h3>
+        <ul>
+            <li><strong>BS (Space Science)</strong> - University of Punjab, Lahore (2021-2025)</li>
+            <li><strong>I.C.S</strong> - Queen Mary College, Lahore Board (2019-2021)</li>
+            <li><strong>Matric</strong> - Queen Mary College, Lahore Board (2017-2019)</li>
+        </ul>
+
+        <h3>Research Interests & Projects</h3>
+        <ul>
+            <li><strong>Geographically Weighted Regression (GWR) with Machine Learning in Gold Anomaly Mapping</strong></li>
+            <li><strong>Contributed to Punjab Urban Land Systems Enhancement (PULSE)</strong></li>
+            <li><strong>Time-series Analysis of SAR Data</strong> - Google Earth Engine</li>
+        </ul>
+
+        <h3>Professional Skills</h3>
+        <ul>
+            <li><strong>GIS & Remote Sensing Tools:</strong> ArcGIS, ERDAS Imagine, Google Earth Engine</li>
+            <li><strong>Programming Languages:</strong> Python, MATLAB, C++, Java</li>
+            <li><strong>Languages:</strong> Urdu (Fluent), Punjabi (Fair), English (Excellent), Chinese (Good)</li>
+        </ul>
+    </div>
+
+    <!-- Maps Section -->
+    <section class="maps-section">
+        <h2>Project Maps</h2>
+        <p>Below are the maps extracted from my projects:</p>
+        <img src="F:\HAMNA\sesemter 7\webpagecv\DEM.png" alt="Map 1">
+        <img src="F:\HAMNA\sesemter 7\webpagecv\flowdirection.png" alt="Map 2">
+        <img src="F:\HAMNA\sesemter 7\webpagecv\streamordermap.png" alt="Map 3">
+        <img src="F:\HAMNA\sesemter 7\webpagecv\streams.png" alt="Map 4">
+    </div>
+
+    <!-- WebGIS Section -->
+    <div class="webgis-section">
+        <h2>Interactive Map - Space Science Department</h2>
+        <div id="map"></div>
+    </div>
+</section>
+
+<footer>
+    <p>Contact: <a href="mailto:hamnaakbarbutt@gmail.com">hamnaakbarbutt@gmail.com</a></p>
+</footer>
+
+<script>
+    // Initialize Leaflet Map
+    var map = L.map('map').setView([31.494043, 74.291728], 12); // Coordinates for Lahore, Pakistan
+
+    // Add OpenStreetMap layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Add marker for Space Science Department
+    L.marker([31.494043, 74.291728]).addTo(map)
+        .bindPopup('<b>Space Science Department</b><br>University of Punjab')
+        .openPopup();
+
+    // Add GeoJSON example (replace with actual data)
+    var geojsonLayer = L.geoJSON({
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [74.291728, 31.494043]
+                },
+                "properties": {
+                    "name": "Point 1"
+                }
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [74.288, 31.492],
+                            [74.294, 31.492],
+                            [74.294, 31.496],
+                            [74.288, 31.496],
+                            [74.288, 31.492]
+                        ]
+                    ]
+                },
+                "properties": {
+                    "name": "Polygon 1"
+                }
+            }
+        ]
+    }).addTo(map);
+</script>
+
+</body>
+</html>
